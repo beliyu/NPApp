@@ -18,35 +18,28 @@ import { AppState } from './app.service';
   template: `
   <p-toolbar >
     <div class="ui-toolbar-group-left">
-      <a> beliPro </a>        
+      <a> beliYu </a>        
     </div>
     
     <div class="ui-toolbar-group-right">
-        <button pButton type="button" (click)="login()"
-          *ngIf="!auth" icon="fa-sign-in"></button>
-        <button pButton type="button" (click)="logout()"
-          *ngIf="auth" icon="fa-sign-out"></button>
+        <login #login> Login </login>
     </div>
   </p-toolbar> 
 
     <main>
-      <home></home>
+      <home *ngIf="login.user"></home>
     </main>
 
     <footer>
-      <span>WebPack Angular 2 Starter </span>
+      <span> First Beat Media - Test App </span>
     </footer>  `
 })
 export class AppComponent {
-  angularclassLogo = 'assets/img/angularclass-avatar.png';
-  name = 'Angular 2 Webpack Starter';
-  auth:boolean = false;
+  public name = 'Angular 2 Webpack Starter';
+  private angularclassLogo = 'assets/img/angularclass-avatar.png';
+  private auth: boolean = false;
   constructor(
     public appState: AppState) {
-
-  }
-
-  ngOnInit() {
   }
 
 }

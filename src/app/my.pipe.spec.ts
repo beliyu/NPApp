@@ -3,44 +3,44 @@ import {
     fakeAsync,
     TestBed
 } from '@angular/core/testing';
-import { 
-    BojaPipe,
-    UzPipe
+import {
+    CatPipe,
+    YearPipe
 } from './my.pipe';
 
-describe('my.pipe - pBoja', () => {
-    let pipe: BojaPipe;
+describe('my.pipe - pCateg', () => {
+    let pipe: CatPipe;
     beforeEach(() => {
-        pipe = new BojaPipe();
+        pipe = new CatPipe();
     });
-    it('passes bl=bl', () => {
-        let niz = [{boja: 'bl'}];
-        expect(pipe.transform(niz, 'bl')).toContain({boja: 'bl'});
+    it('passes physics=physics', () => {
+        let niz = [{cat: 'physics'}];
+        expect(pipe.transform(niz, 'physics')).toContain({cat: 'physics'});
     });
-    it('passes bb=', () => {
-        let niz = [{boja: 'bb'}];
-        expect(pipe.transform(niz, '')).toContain({boja: 'bb'});
+    it('passes physics=', () => {
+        let niz = [{cat: 'physics'}];
+        expect(pipe.transform(niz, '')).toContain({cat: 'physics'});
     });
-    it('does not pass bl=rd', () => {
-        let niz = [{boja: 'bl'}];
-        expect(pipe.transform(niz, 'rd')).toEqual([]);
+    it('does not pass physics=economics', () => {
+        let niz = [{cat: 'physics'}];
+        expect(pipe.transform(niz, 'economics')).toEqual([]);
     });
 });
 
-describe('my.pipe - pUz', () => {
-    let pipe: UzPipe;
+describe('my.pipe - pYear', () => {
+    let pipe: YearPipe;
     let niz;
     beforeEach(() => {
-        pipe = new UzPipe();
-        niz = [{ime: 'beli', grad: 'Sirca'}];
+        pipe = new YearPipe();
+        niz = [{year: 1975}];
     });
-    it('passes beli-el', () => {
-        expect(pipe.transform(niz, 'el')).toContain({ime: 'beli', grad: 'Sirca'});
+    it('passes in the range', () => {
+        expect(pipe.transform(niz, 1970, 2015)).toContain({year: 1975});
     });
-    it('passes Sirca-rca', () => {
-        expect(pipe.transform(niz, 'rca')).toContain({ime: 'beli', grad: 'Sirca'});
+    it('passes at the end of the range', () => {
+        expect(pipe.transform(niz, 1970, 1975)).toContain({year: 1975});
     });
-    it('does not pass beli,Sirca-rac', () => {
-        expect(pipe.transform(niz, 'rac')).toEqual([]);
+    it('does not pass outside the scope', () => {
+        expect(pipe.transform(niz, 1990, 2015)).toEqual([]);
     });
 });

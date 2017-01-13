@@ -1,0 +1,14 @@
+input{
+    width:100px !important;
+    height: 26px; 
+}
+.btn{
+    font-family: Cambria, Georgia;
+    background: #ccc;
+    font-weight: 600;
+    margin-left: 5px;
+    padding: 2px 10px;
+}
+b {
+    color:#06c
+}

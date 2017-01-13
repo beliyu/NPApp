@@ -1,5 +1,5 @@
 import { NgRedux } from 'ng2-redux';
-import { WhmService, WhModel } from './../wh.service';
+import { WhmService } from './../wh.service';
 import {
   inject,
   TestBed
@@ -29,13 +29,13 @@ xdescribe('Home', () => {
         },
         deps: [MockBackend, BaseRequestOptions]
       },
-      WhmService, WhModel,
+      WhmService,
       NgRedux,
       HomeComponent
     ]
   }));
 
-  it('should log ngOnInit', inject([ HomeComponent, WhModel, NgRedux ],
+  it('should log ngOnInit', inject([ HomeComponent, NgRedux ],
       (home: HomeComponent, _whm: WhmService, _ngRedux: NgRedux<any>) => {
     spyOn(console, 'log');
     expect(console.log).not.toHaveBeenCalled();

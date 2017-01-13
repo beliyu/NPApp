@@ -18,7 +18,6 @@ import { MockBackend } from '@angular/http/testing';
 // Load the implementations that should be tested
 import {
   WhmService,
-  WhModel
 } from './wh.service';
 
 describe('whService', () => {
@@ -29,98 +28,32 @@ describe('whService', () => {
       MockBackend,
       {
         provide: Http,
-        useFactory: function(backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
-          return new Http(backend, defaultOptions);
+        // tslint:disable-next-line:object-literal-shorthand
+        useFactory: (backend: ConnectionBackend, defOpt: BaseRequestOptions) => {
+          return new Http(backend, defOpt);
         },
         deps: [MockBackend, BaseRequestOptions]
       },
-      WhmService, WhModel
+      WhmService
     ]
   }));
 
-  it('whModel should be defined', () => {
-      let wm = new WhModel('Dragan', 'Kraljevo');
-    expect(wm.boja).toBe('bl');
-  });
-
- it('getAll()',
+  it('getAll()',
     inject([WhmService, MockBackend], fakeAsync((whmService, mockBackend ) => {
-     let res: WhModel;
-     mockBackend.connections.subscribe(c => {
-       expect(c.request.url).toBe('http://localhost:3004/WhM');
-       expect(c.request.method).toBe(RequestMethod.Get);
-       let response = new ResponseOptions({body: '{"ime": "Omer"}'});
-       c.mockRespond(new Response(response));
-     });
-     whmService.getAll().subscribe((_res) => {
-       res = _res;
-     });
-     tick();
-     expect(res.ime).toBe('Omer');
-   }))
- );
-
- it('Add()',
-   inject([WhmService, MockBackend], fakeAsync((whmService, mockBackend ) => {
-     let res: any;
-     mockBackend.connections.subscribe(c => {
-       expect(c.request.url).toBe('http://localhost:3004/WhM');
-       expect(c.request.method).toBe(RequestMethod.Post);
-     });
-   }))
- );
-
- it('del()',
-    inject([WhmService, MockBackend], fakeAsync((whmService, mockBackend ) => {
-     let res: WhModel;
-     let w = 'cyRt6Per';
-     mockBackend.connections.subscribe(c => {
-       expect(c.request.url).toBe('http://localhost:3004/WhM/' + w);
-       expect(c.request.method).toBe(RequestMethod.Delete);
-       let response = new ResponseOptions({body: '{"ime": "Omer"}'});
-       c.mockRespond(new Response(response));
-     });
-     whmService.del(w).subscribe((_res) => {
-       res = _res;
-     });
-     tick();
-     expect(res.ime).toBe('Omer');
-   }))
- );
-
- it('getOne()',
-    inject([WhmService, MockBackend], fakeAsync((whmService, mockBackend ) => {
-     let res: WhModel;
-     let w = 'cyRt6Per';
-     mockBackend.connections.subscribe(c => {
-       expect(c.request.url).toBe('http://localhost:3004/WhM/' + w);
-       expect(c.request.method).toBe(RequestMethod.Get);
-       let response = new ResponseOptions({body: '{"ime": "Omer"}'});
-       c.mockRespond(new Response(response));
-     });
-     whmService.getOne(w).subscribe((_res) => {
-       res = _res;
-     });
-     tick();
-     expect(res.ime).toBe('Omer');
-   }))
- );
-
- it('togg()',
-    inject([WhmService, MockBackend], fakeAsync((whmService, mockBackend ) => {
-     let res: WhModel;
-     let w = {boja: 'rd', id: 'ert4Sar'};
-     mockBackend.connections.subscribe(c => {
-       expect(c.request.url).toBe('http://localhost:3004/WhM/' + w.id);
-       expect(c.request.method).toBe(RequestMethod.Patch);
-       let response = new ResponseOptions({body: '{"ime": "Omer"}'});
-       c.mockRespond(new Response(response));
-     });
-     whmService.togg(w).subscribe((_res) => {
-       res = _res;
-     });
-     tick();
-     expect(res.ime).toBe('Omer');
+      let res;
+      mockBackend.connections.subscribe((c) => {
+        expect(c.request.url).toBe('http://api.nobelprize.org/v1/prize.json');
+        expect(c.request.method).toBe(RequestMethod.Get);
+        let response = new ResponseOptions({
+          body: '{"prizes": [{"year":"2016", "laureates":[{"surname":"Tu"}] }]}'});
+        c.mockRespond(new Response(response));
+      });
+      whmService.getAll().subscribe((_res) => {
+        res = _res;
+      });
+      tick();
+      expect(res[0].year).toBe('2016');
+      expect(res[0].laureates[0].surname).toBe('Tu');
    }))
  );
 

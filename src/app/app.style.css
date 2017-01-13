@@ -7,7 +7,17 @@ span.active {
 }
 footer {
   text-align: center;
+  margin: 0.2em;
 }
 .active{
   font-weight: 600;
+}
+.ui-toolbar-group-right {
+  margin-right: 0.5em;
+  margin-top: 0.15em;
+}
+.ui-toolbar-group-left a{
+    font-size: 1.5em;
+    margin-left: 0.3em;
+    color: #537595;
 }
