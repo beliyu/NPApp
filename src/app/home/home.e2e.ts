@@ -1,36 +1,37 @@
 import { browser, by, element } from 'protractor';
 
-xdescribe('Home', () => {
+xdescribe('Home ', () => {
 
   beforeEach(() => {
-    // change hash depending on router LocationStrategy
-    browser.get('/#/home');
+    browser.get('/');
+    let un = element(by.css('input[name=username]'));
+    let ps = element(by.css('input[name=password]'));
+    un.sendKeys('admin');
+    ps.sendKeys('admin');
   });
-
 
   it('should have a title', () => {
-    let subject = browser.getTitle();
-    let result  = 'Angular2 Webpack Starter from @AngularClass';
-    expect(subject).toEqual(result);
+    element(by.css('a.btn')).click().then(() => {
+      let lin = element(by.css('main h2')).getText();
+      let result = 'Nobel Prices list';
+      expect(lin).toEqual(result);
+    });
   });
 
-  it('should have "Dobro vece" h2', () => {
-    let subject = element.all(by.css('h2')).get(0).getText();
-    let result  = 'Dobro vece, ...';
-    expect(subject).toEqual(result);
+  it('should have a image', () => {
+    element(by.css('a.btn')).click().then(() => {
+      let lin = element(by.css('main img')).isPresent();
+      expect(lin).toEqual(true);
+    });
   });
 
-  it('should have <home>', () => {
-    let subject = element(by.css('app home')).isPresent();
-    let result  = true;
-    expect(subject).toEqual(result);
+  it('filter first name = Kofi', () => {
+    element(by.css('a.btn')).click().then(() => {
+      let fn = element.all(by.css('table thead input')).get(0);
+      fn.sendKeys('Kofi');
+      let sn = element.all(by.css('table tbody tr')).count();
+      expect(sn).toEqual(1);
+    });
   });
-
-  it('should have buttons', () => {
-    let subject = element.all(by.css('button')).first().getText();
-    let result  = 'home';
-    expect(subject).toEqual(result);
-  });
-
 
 });

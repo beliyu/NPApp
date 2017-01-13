@@ -1,7 +1,7 @@
 import { animate } from '@angular/core';
 import { browser, by, element } from 'protractor';
 
-describe('App, before auth, ', () => {
+xdescribe('App, before auth, ', () => {
 
   beforeEach(() => {
     browser.get('/');
@@ -26,13 +26,12 @@ describe('App, before auth, ', () => {
 
 });
 
-describe('App, after auth, ', () => {
+xdescribe('App, after auth, ', () => {
 
   beforeEach(() => {
     browser.get('/');
     let un = element(by.css('input[name=username]'));
     let ps = element(by.css('input[name=password]'));
-    let li = element(by.css('a.btn'));
     un.sendKeys('admin');
     ps.sendKeys('admin');
   });
