@@ -1,14 +1,16 @@
 import { DataResolver } from './../app.resolver';
-import { Rwa } from './rwa.component';
-import { Input, Output, EventEmitter, ChangeDetectionStrategy,
-     style, ViewEncapsulation } from '@angular/core';
+import { RwaComponent } from './rwa.component';
+import {
+    Input, Output, EventEmitter, ChangeDetectionStrategy,
+    style, ViewEncapsulation
+} from '@angular/core';
 import { Component, trigger, state, animate, transition } from '@angular/core';
 
 @Component({
-  selector: 'table2-component',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  template: `
+    selector: 'table2-component',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    template: `
    
     <rwa #rwa></rwa><br/> 
 
@@ -24,7 +26,6 @@ import { Component, trigger, state, animate, transition } from '@angular/core';
       <p-column field="sname" header="SurName" [sortable]="true"
            filterMatchMode="contains" [filter]="true" ></p-column>
 
-
   </p-dataTable>
   `,
     styles: [`
@@ -33,9 +34,6 @@ import { Component, trigger, state, animate, transition } from '@angular/core';
     `]
 })
 export class Table2Component {
-@Input() public data;
-
-// whTogg(w){this.buttBoja.emit(w);}
-// whDel(w){this.buttDel.emit(w);}
+    @Input() public data;
 
 }

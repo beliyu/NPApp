@@ -25,7 +25,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
  */
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
-  title: 'Angular2 Webpack Starter from @AngularClass',
+  title: 'Nobel Price App',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer()
 };

@@ -9,27 +9,29 @@ import { AppState } from '../app.service';
 @Component({
   selector: 'home',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: [ './home.component.css' ],
+  styleUrls: ['./home.component.css'],
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
-   private WM= [] ;
-   private ime$: Observable<any>;
+  private WM = [];
+  private ime$: Observable<any>;
 
-  constructor(private _whm: WhmService) {  }
+  constructor(private _whm: WhmService) { }
 
   public ngOnInit() {
-  this.whmGetAll();
+    this.whmGetAll();
   }
 
-private whmGetAll() {
+  private whmGetAll() {
     this._whm.getAll().subscribe((data) => {
       console.log(data);
       let tDat = [];
       for (let n of data) {
         for (let m of n.laureates) {
-        tDat.push({year: n.year, cat: n.category,
-          fname: m.firstname, sname: m.surname});
+          tDat.push({
+            year: n.year, cat: n.category,
+            fname: m.firstname, sname: m.surname
+          });
         }
       }
       this.WM = tDat;

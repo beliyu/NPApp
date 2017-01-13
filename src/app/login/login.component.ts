@@ -6,26 +6,26 @@ import { Component } from '@angular/core';
     styleUrls: ['./Login.component.css']
 })
 export class LoginComponent {
-   public message: string;
-   public user: string;
+    public message: string;
+    public user: string;
 
     constructor() {
         this.message = '';
     };
 
-public login(username: string, password: string): void {
-    this.message = '';
-    if (username !== 'admin' || password !== 'admin') {
-        this.message = 'Incorrect credentials.';
-        setTimeout(() => {
-            this.message = '';
-        }, 2500);
+    public login(username: string, password: string): void {
+        this.message = '';
+        if (username !== 'admin' || password !== 'admin') {
+            this.message = 'Incorrect credentials.';
+            setTimeout(() => {
+                this.message = '';
+            }, 2500);
         } else {
             this.user = username;
-    }
-};
+        }
+    };
 
-public logout(): void {
-    this.user = '';
-};
+    public logout(): void {
+        this.user = '';
+    };
 }

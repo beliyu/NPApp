@@ -13,10 +13,10 @@ import { ToolbarModule, ButtonModule, DataTableModule,
 import { ENV_PROVIDERS } from './environment';
 // App is our top level component
 import { HomeComponent } from './home';
-import { Rwa, Table2Component } from './home';
+import { RwaComponent, Table2Component } from './home';
 import { LoginComponent } from './login/login.component';
 import { WhmService } from './wh.service';
-import { CatPipe, YearPipe } from './my.pipe';
+import { CatPipe, YearPipe } from './pipe';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
@@ -43,7 +43,7 @@ type StoreType = {
     HomeComponent,
     LoginComponent,
     Table2Component,
-    CatPipe, YearPipe, Rwa
+    CatPipe, YearPipe, RwaComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

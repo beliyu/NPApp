@@ -23,21 +23,21 @@ import { Component, Output, EventEmitter } from '@angular/core';
         span {font-weight: 600;}`
     ]
 })
-export class Rwa {
+export class RwaComponent {
     public pb: string = '';
     public pu: string = '';
     public rangeVal: number[] = [1975, 2005];
     public rV0: number = 1975;
     public rV1: number = 2005;
     private categ = [
-        {a: 'All', b: ''},
-        {a: 'Chemistry', b: 'chemistry'},
-        {a: 'Economics', b: 'economics'},
-        {a: 'Literature', b: 'literature'},
-        {a: 'Medicine', b: 'medicine'},
-        {a: 'Peace', b: 'peace'},
-        {a: 'Physics', b: 'physics'}];
-    public slChn (a) {
+        { a: 'All', b: '' },
+        { a: 'Chemistry', b: 'chemistry' },
+        { a: 'Economics', b: 'economics' },
+        { a: 'Literature', b: 'literature' },
+        { a: 'Medicine', b: 'medicine' },
+        { a: 'Peace', b: 'peace' },
+        { a: 'Physics', b: 'physics' }];
+    public slChn(a) {
         this.rV0 = +this.rangeVal[0];
         this.rV1 = +this.rangeVal[1];
     };
