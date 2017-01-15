@@ -20,8 +20,7 @@ describe(`Login Component`, () => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       schemas: [NO_ERRORS_SCHEMA],
-    })
-      .compileComponents(); // compile template and css
+    });
   }));
 
   // synchronous beforeEach

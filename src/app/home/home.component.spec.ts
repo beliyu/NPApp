@@ -1,47 +1,61 @@
-import { NgRedux } from 'ng2-redux';
-import { WhmService } from './../wh.service';
+import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import {
   inject,
-  TestBed
+  async,
+  fakeAsync,
+  tick,
+  TestBed,
+  ComponentFixture
 } from '@angular/core/testing';
-import { Component } from '@angular/core';
 import {
-  BaseRequestOptions,
-  ConnectionBackend,
   Http
 } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 // Load the implementations that should be tested
-import { AppState } from '../app.service';
 import { HomeComponent } from './home.component';
+import { WhmService } from './../wh.service';
 
-xdescribe('Home', () => {
-  // provide our implementations or mocks to the dependency injector
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      BaseRequestOptions,
-      MockBackend,
-      {
-        provide: Http,
-        useFactory: function(backend: ConnectionBackend, defaultOptions: BaseRequestOptions) {
-          return new Http(backend, defaultOptions);
-        },
-        deps: [MockBackend, BaseRequestOptions]
-      },
-      WhmService,
-      NgRedux,
-      HomeComponent
-    ]
+describe(`Home Component`, () => {
+  let comp: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
+
+  // async beforeEach
+  beforeEach(async(() => {
+
+  // stub UserService for test purposes
+    let whmServiceStub = {
+      user: { name: 'Test User'}
+    };
+    TestBed.configureTestingModule({
+      declarations: [HomeComponent],
+       providers:    [WhmService, Http ],
+      schemas: [NO_ERRORS_SCHEMA],
+    });
   }));
 
-  it('should log ngOnInit', inject([ HomeComponent, NgRedux ],
-      (home: HomeComponent, _whm: WhmService, _ngRedux: NgRedux<any>) => {
-    spyOn(console, 'log');
-    expect(console.log).not.toHaveBeenCalled();
+  // synchronous beforeEach
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    comp = fixture.componentInstance;
+    let _whm = fixture.debugElement.injector.get(WhmService);
+    let spy = spyOn(_whm, 'getAll')
+          .and.returnValue(
+              Observable.of(new Object())
+              .map(() => JSON.stringify([
+                {year: '2016', laureates: [{ surname: 'Tu'}]
+               }])));
+    fixture.detectChanges(); // trigger initial data binding
+  });
 
-    home.ngOnInit();
-    expect(console.log).toHaveBeenCalled();
+
+  xit('should init component with laureates',  fakeAsync(() => {
+    tick();
+    fixture.detectChanges();
+    expect(comp.WM).toEqual('');
   }));
+
 
 });

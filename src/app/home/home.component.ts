@@ -9,13 +9,31 @@ import { AppState } from '../app.service';
 @Component({
   selector: 'home',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./home.component.css'],
-  templateUrl: './home.component.html'
+  styles: [`
+main {
+  padding: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+}
+h2 {
+  margin-bottom: 30px;
+}
+`],
+  template: `
+<main>
+  <div class="col-md-2"> 
+    <img src="//upload.wikimedia.org/wikipedia/en/thumb/e/ed/Nobel_Prize.png/220px-Nobel_Prize.png"
+       width="150" height="150">
+  </div>
+  <div class="col-md-10">
+    <h2> Nobel Prices list </h2>
+    <table2-component  [data]="WM" >
+    </table2-component>
+  </div>  
+</main>`
 })
 export class HomeComponent implements OnInit {
-  private WM = [];
-  private ime$: Observable<any>;
-
+  public WM = [];
   constructor(private _whm: WhmService) { }
 
   public ngOnInit() {
