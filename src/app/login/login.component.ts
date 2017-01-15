@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'login',
@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class LoginComponent {
     public message: string;
     public user: string;
+    @Output() public userChange = new EventEmitter();
 
     constructor() {
         this.message = '';
@@ -22,10 +23,12 @@ export class LoginComponent {
             }, 2500);
         } else {
             this.user = username;
+            this.userChange.emit({user: this.user});
         }
     };
 
     public logout(): void {
         this.user = '';
+        this.userChange.emit({user: this.user});
     };
 }

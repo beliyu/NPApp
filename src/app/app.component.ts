@@ -18,16 +18,16 @@ import { AppState } from './app.service';
   template: `
   <p-toolbar >
     <div class="ui-toolbar-group-left">
-      <a> beliYu </a>        
+      <a> beliYu </a>     
     </div>
     
     <div class="ui-toolbar-group-right">
-        <login #login> Login </login>
+        <login (userChange)="userCh($event)"> Login </login>
     </div>
   </p-toolbar> 
 
     <main>
-      <home *ngIf="login.user"></home>
+      <home *ngIf="user"></home>
     </main>
 
     <footer>
@@ -36,10 +36,12 @@ import { AppState } from './app.service';
 })
 export class AppComponent {
   public name = 'Angular 2 Webpack Starter';
+  public user: string = '';
   private angularclassLogo = 'assets/img/angularclass-avatar.png';
-  private auth: boolean = false;
   constructor(
     public appState: AppState) {
   }
-
+  public userCh(e) {
+    this.user = e.user;
+  };
 }
