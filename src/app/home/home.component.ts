@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   private whmGetAll() {
     this._whm.getAll().subscribe((data) => {
-      console.log(data);
+      console.log(data[0]);
       let tDat = [];
       for (let n of data) {
         for (let m of n.laureates) {
